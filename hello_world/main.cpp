@@ -1,5 +1,5 @@
 #include <iostream>
 int main(int argc, char** argv){
-    std::cout << "Hallo Welt!" << std::endl;
+    std::cout << "Hello world!" << std::endl;
     return 0;
 }
