@@ -2,7 +2,7 @@
 #include <random>
 #include <fstream>
 #include <array>
-
+#include <algorithm>
 
 const int teilchen=1000000;
 //Entscheidung ob links oder rechts
@@ -33,6 +33,22 @@ int m2(std::array<int,teilchen> dots){
     return m;
 }
 
+//Dichteverteilung berechnen
+void dichte(std::array<int,teilchen> dots){
+  using namespace std;
+    std::array<int,2001> dichte;
+    fill( begin(dichte), end(dichte), 0 );
+    for (int i = 0; i < teilchen; ++i){
+        int a=dots[i];
+	dichte[a+1000]=dichte[a+1000]+1;
+    }
+    //Ausgabe
+    std::ofstream raus ("dichte.txt");
+    for (int i = 0; i < 2001; ++i){
+        raus << i-1000 << " " << dichte[i] << std::endl;
+    }
+}
+
 int main(int argc, char** argv){
 std::mt19937 gen;
 gen.seed(12447987);
@@ -50,11 +66,8 @@ std::uniform_real_distribution<> dis(0,1);
 	    dots[k]=dots[k]+lr(dis(gen));
 //	    std::cout << dots[k] << std::endl;
 	}
-      out<< i << " " << m1(dots) << " " << m2(dots) << std::endl;
+      out<< i << " " << m1(dots)/teilchen << " " << m2(dots)/teilchen << std::endl;
     }
-
+    dichte(dots);
     return 0;
 }
-
-
-
