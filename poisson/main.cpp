@@ -46,7 +46,7 @@ int main(int argc, char** argv){
         }
     }
     
-    ladung[50][50]=1;
+    ladung[50][50]=-1000;
 
 
     //Solver
@@ -57,7 +57,7 @@ int main(int argc, char** argv){
     do{
       for (int i = 1; i < 99; ++i){
 	  for (int j = 1; j < 99; ++j){
-	      potn[i][j]=(pot[i+1][j]+pot[i-1][j]+pot[i][j+1]+pot[i][j-1]+4*ladung[i][j])/4;
+	      potn[i][j]=(pot[i+1][j]+pot[i-1][j]+pot[i][j+1]+pot[i][j-1]+ladung[i][j])/4;
 	  }
       }
       abb = abbruch(potn,pot,0.01);
@@ -69,9 +69,8 @@ int main(int argc, char** argv){
     std::ofstream out ("Potential.txt");
     for (int i = 0; i < 100; ++i){
         for (int j = 0; j < 100; ++j){
-            out << pot[i][j] << " ";
+            out << i << " " << j << " " << pot[i][j] << std::endl;
         }
-	out << std::endl;
     }
 
     return 0;
