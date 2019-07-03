@@ -44,8 +44,8 @@ void dichte(std::array<int,teilchen> dots){
     }
     //Ausgabe
     std::ofstream raus ("dichte.txt");
-    for (int i = 0; i < 2001; ++i){
-        raus << i-1000 << " " << dichte[i] << std::endl;
+    for (int i = 0; i < 1000; ++i){
+        raus << 2*i-1000 << " " << dichte[2*i] << std::endl;
     }
 }
 
