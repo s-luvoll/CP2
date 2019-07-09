@@ -61,7 +61,7 @@ void monkey(){
     while(h>0){
 	float v_2=v_1+1/6.0*steps*K_1(v_1,gamma_y,m_m);	//using Runge-Kutta
 	h=h-v_2*steps;
-	out << v_2 << " "<< h << std::endl;
+	out << v_2 << " " << (steps*i) << " "<< h << std::endl;
 	v_1=v_2;v_2=0;
 	i++;k=i;
     }
@@ -85,6 +85,7 @@ void energy_m(){ //testing conversation of energy of the monkey
 	float h=0;
 	in >> v;
 	in >> h;
+	in >> h;
         out << potential(h,m_m) << " " << kinetic(v,m_m) << " " << (potential(h,m_m)+kinetic(v,m_m)) << std::endl;
 	
     }
@@ -98,6 +99,7 @@ void energy_b(){
 	float w;
 	float h;
 	distance=0;
+	in >> v;
 	in >> v;
 	in >> h;
 	in >> w;
@@ -116,7 +118,7 @@ void ball(){
     while(h>0){	
         float v_2=v_1+1/6.0*steps*K_1(v_1,gamma_y,m_b);	//using Runge-Kutta
 	h=h-v_2*steps;
-	out << v_2 << " "<< h << " ";
+	out << (steps*i) << " " << v_2 << " "<< h << " ";
 	v_1=v_2;v_2=0;
         float w_2=w_1+1/6.0*steps*K_2(w_1,gamma_x,m_b);
 	distance=distance-w_2*steps;
