@@ -1,3 +1,4 @@
+#define _USE_MATH_DEFINES
 #include <iostream>
 #include <fstream>
 #include <array>
@@ -35,7 +36,10 @@ int main(int argc, char** argv){
     //
     //Randbedingungen einfügen
     for (int i = 0; i < 100; ++i){
-        pot[0][i]=1000;
+        pot[0][i]=10;
+	pot[i][0]=10;
+	pot[99][i]=10;
+	pot[i][99]=10;
     }
     
     //Ladungsverteilung definieren
@@ -46,7 +50,7 @@ int main(int argc, char** argv){
         }
     }
     
-    ladung[50][50]=-1000;
+    ladung[50][50]=0;
 
 
     //Solver
@@ -57,10 +61,10 @@ int main(int argc, char** argv){
     do{
       for (int i = 1; i < 99; ++i){
 	  for (int j = 1; j < 99; ++j){
-	      potn[i][j]=(pot[i+1][j]+pot[i-1][j]+pot[i][j+1]+pot[i][j-1]+ladung[i][j])/4;
+	      potn[i][j]=(pot[i+1][j]+pot[i-1][j]+pot[i][j+1]+pot[i][j-1])/4+M_PI*ladung[i][j];
 	  }
       }
-      abb = abbruch(potn,pot,0.01);
+      abb = abbruch(potn,pot,0.0001);
       pot=potn;
       i++;
     }while(abb);
